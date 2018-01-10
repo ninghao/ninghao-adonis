@@ -1,8 +1,9 @@
 'use strict'
 
 class HelloController {
-  render ({ request }) {
-    return `hello ~ ${ request.input('name') }`
+  render ({ request, view }) {
+    const name = request.input('name')
+    return view.render('hello', { name })
   }
 }
 
