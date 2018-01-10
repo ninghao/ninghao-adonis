@@ -13,6 +13,7 @@
 |
 */
 
+const Database = use('Database')
 const Route = use('Route')
 
 Route.on('/').render('welcome')
@@ -22,3 +23,7 @@ Route.on('/').render('welcome')
 // })
 
 Route.get('/hello', 'HelloController.render')
+
+Route.get('/posts', async () => {
+  return await Database.table('posts').select('*')
+})
