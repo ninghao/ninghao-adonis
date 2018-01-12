@@ -20,3 +20,7 @@ Route.on('/').render('welcome')
 Route.get('/posts', () => 'List of posts.')
 
 Route.post('/posts', () => 'Post has been created.')
+
+Route.get('/posts/:id', ({ params }) => {
+  return `You're watching post ${ params.id }.`
+})
