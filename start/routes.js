@@ -26,3 +26,19 @@ Route
 Route
   .get('/list-of-users', () => 'List of users.')
   .as('users.index')
+
+Route.get('/users', ({ request }) => {
+  switch (request.format()) {
+    case 'json':
+      return [
+        { name: 'wanghao' },
+        { name: 'xiaoxue' }
+      ]
+    default:
+      return `
+        - wanghao
+        - xiaoxue
+      `
+  }
+})
+.formats(['json', 'html'], true)
