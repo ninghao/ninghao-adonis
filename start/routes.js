@@ -17,16 +17,8 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-Route.get('/posts', 'PostController.index')
-
-Route.post('/posts', 'PostController.store')
-
-Route.get('/posts/create', 'PostController.create')
-
-Route.get('/posts/:id', 'PostController.show')
-
-Route.patch('/posts/:id', 'PostController.update')
-
-Route.delete('/posts/:id', 'PostController.destroy')
-
-Route.get('/posts/:id/edit', 'PostController.edit')
+Route
+  .resource('posts', 'PostController')
+  // .except(['index'])
+  // .only(['index', 'show'])
+  // .apiOnly()
