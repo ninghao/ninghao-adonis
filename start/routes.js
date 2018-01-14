@@ -42,8 +42,17 @@ Route
   //   return '<h1>List of posts.</h1>'
   // })
 
-Route.get('/posts', ({ request, response }) => {
-  response.cookie('theme', 'dark')
-  response.clearCookie('theme')
-  return request.cookie('theme', 'light')
-})
+//
+  // Route.get('/posts', ({ request, response }) => {
+  //   response.cookie('theme', 'dark')
+  //   response.clearCookie('theme')
+  //   return request.cookie('theme', 'light')
+  // })
+
+//
+  // Route.get('/posts', ({ response }) => {
+  //   // response.send('List of posts.')
+  //   return {
+  //     title: 'List of posts.'
+  //   }
+  // })
