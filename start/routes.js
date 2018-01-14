@@ -34,3 +34,10 @@ Route
 //
   // Route.get('/posts', ({ request }) => request.headers())
   // Route.get('/posts', ({ request }) => request.header('user-agent'))
+
+//
+  // Route.get('/posts', ({ request, response }) => {
+  //   // response.header('Content-type', 'text/plain')
+  //   response.type('text/plain')
+  //   return '<h1>List of posts.</h1>'
+  // })
