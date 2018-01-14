@@ -56,3 +56,19 @@ Route
   //     title: 'List of posts.'
   //   }
   // })
+
+const delay = (data, time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data)
+    }, time)
+  })
+}
+
+Route.get('/posts', async ({ response }) => {
+  const data = await delay(
+    'List of posts.',
+    3000
+  )
+  return data
+})
