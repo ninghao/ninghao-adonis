@@ -74,17 +74,18 @@ Route
   //   return data
   // })
 
-Route.get('/list-of-posts', ({ response }) => {
-  // response.redirect('/posts', true, 301)
-  response.route('list-of-posts')
-})
-
-Route.get('/list-of-food-posts', ({ response }) => {
-  // response.redirect('/posts', true, 301)
-  response.route('list-of-posts', { category: 'food' })
-})
-
-Route.get('/posts/:category?', ({ params }) => {
-  return `List of ${ params.category || 'default' } posts.`
-})
-.as('list-of-posts')
+//
+  // Route.get('/list-of-posts', ({ response }) => {
+  //   // response.redirect('/posts', true, 301)
+  //   response.route('list-of-posts')
+  // })
+  //
+  // Route.get('/list-of-food-posts', ({ response }) => {
+  //   // response.redirect('/posts', true, 301)
+  //   response.route('list-of-posts', { category: 'food' })
+  // })
+  //
+  // Route.get('/posts/:category?', ({ params }) => {
+  //   return `List of ${ params.category || 'default' } posts.`
+  // })
+  // .as('list-of-posts')
