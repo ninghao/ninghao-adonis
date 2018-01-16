@@ -1,1 +1,7 @@
 <h1>{{{ pageTitle || 'Untitled' }}}</h1>
+
+@if(user.name)
+{{ user.name }}
+@else
+Login / Signup
+@endif
