@@ -6,12 +6,9 @@
 @endsection
 
 @section('content')
-@each(entity in entities)
-  <div>
-    <small>
-      {{ $loop.index + 1 }}.
-    </small>
-    {{ entity.title }}: {{ entity.content }}
-  </div>
-@endeach
+  @!component('components.list', {
+    entities,
+    border: true,
+    borderColor: '#ddeaf2'
+  })
 @endsection

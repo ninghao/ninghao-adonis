@@ -8,7 +8,8 @@ class PostController {
     }
     const entities = [
       { id: 1, title: 'Lemon', content: '🍋' },
-      { id: 2, title: 'Watermelon', content: '🍉' }
+      { id: 2, title: 'Watermelon', content: '🍉' },
+      { id: 3, title: 'Carrot', content: '🥕' }
     ]
 
     return view.render('posts.index', { pageTitle, user, entities })
