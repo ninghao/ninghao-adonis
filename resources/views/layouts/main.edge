@@ -7,6 +7,12 @@
   <title>{{ pageTitle || 'ninghao' }}</title>
 </head>
 <body>
+  <div>
+    <small>URL: </small>{{ request.url() }}<br>
+    <small>OriginalUrl: </small>{{ request.originalUrl() }}<br>
+    <small>Method: </small>{{ request.method() }}<br>
+    <small>Protocol: </small>{{ request.protocol() }}<br>
+  </div>
   <div class="container">
     <div class="header">
       @section('header')
