@@ -2,7 +2,9 @@
 
 class PostController {
   index ({ view }) {
-    return view.render('posts.index')
+    const pageTitle = 'List of <i>posts</i>'
+
+    return view.render('posts.index', { pageTitle })
   }
 }
 
