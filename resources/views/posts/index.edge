@@ -1,15 +1,1 @@
-<h1>{{{ pageTitle || 'Untitled' }}}</h1>
-
-@each(entity in entities)
-  <div>
-    <small>
-      {{ $loop.index + 1 }}.
-      first: <i>{{ $loop.first }}</i>
-      last: <i>{{ $loop.last }}</i>
-      total: <i>{{ $loop.total }}</i>
-      odd: <i>{{ $loop.isOdd }}</i>
-      even: <i>{{ $loop.isEven }}</i>
-    </small>
-    {{ entity.title }}: {{ entity.content }}
-  </div>
-@endeach
+@layout('layouts.main')
