@@ -1,1 +1,17 @@
 @layout('layouts.main')
+
+@section('header')
+{{-- @super --}}
+<h1>{{ pageTitle || 'Untitled' }}</h1>
+@endsection
+
+@section('content')
+@each(entity in entities)
+  <div>
+    <small>
+      {{ $loop.index + 1 }}.
+    </small>
+    {{ entity.title }}: {{ entity.content }}
+  </div>
+@endeach
+@endsection

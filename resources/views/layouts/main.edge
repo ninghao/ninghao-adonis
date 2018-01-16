@@ -7,6 +7,17 @@
   <title>{{ pageTitle || 'ninghao' }}</title>
 </head>
 <body>
-
+  <div class="container">
+    <div class="header">
+      @section('header')
+      <small>__headerSection__</small>
+      @endsection
+    </div>
+    <div class="content">
+      @section('content')
+        <p>There is no content yet.</p>
+      @endsection
+    </div>
+  </div>
 </body>
 </html>
