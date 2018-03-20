@@ -43,7 +43,13 @@ class PostController {
       .update(updatedPost)
   }
 
-  async destroy () {
+  async destroy ({ request, params }) {
+    await Database
+      .table('posts')
+      .where('id', params.id)
+      .delete()
+
+    return 'success'
   }
 }
 
