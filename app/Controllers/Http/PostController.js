@@ -26,10 +26,21 @@ class PostController {
     return view.render('post.show', { post })
   }
 
-  async edit () {
+  async edit ({ view, params }) {
+    const post = await Database
+      .from('posts')
+      .where('id', params.id)
+      .first()
+
+    return view.render('post.edit', { post })
   }
 
-  async update () {
+  async update ({ request, params }) {
+    const updatedPost = request.only(['title', 'content'])
+    await Database
+      .table('posts')
+      .where('id', params.id)
+      .update(updatedPost)
   }
 
   async destroy () {
