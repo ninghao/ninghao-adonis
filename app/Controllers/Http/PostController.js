@@ -4,7 +4,8 @@ class PostController {
   async index () {
   }
 
-  async create () {
+  async create ({ view }) {
+    return view.render('post.create')
   }
 
   async store () {
