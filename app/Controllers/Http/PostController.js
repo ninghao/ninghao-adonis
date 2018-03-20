@@ -1,5 +1,7 @@
 'use strict'
 
+const Database = use('Database')
+
 class PostController {
   async index () {
   }
@@ -8,7 +10,10 @@ class PostController {
     return view.render('post.create')
   }
 
-  async store () {
+  async store ({ request }) {
+    const newPost = request.only(['title', 'content'])
+    const postID = await Database.insert(newPost).into('posts')
+    console.log('postID: ', postID)
   }
 
   async show () {
