@@ -24,10 +24,12 @@ class PostController {
   }
 
   async show ({ view, params }) {
-    const post = await Database
-      .from('posts')
-      .where('id', params.id)
-      .first()
+    // const post = await Database
+    //   .from('posts')
+    //   .where('id', params.id)
+    //   .first()
+
+    const post = await Post.find(params.id)
 
     return view.render('post.show', { post })
   }
