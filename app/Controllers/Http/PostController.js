@@ -29,7 +29,7 @@ class PostController {
     //   .where('id', params.id)
     //   .first()
 
-    const post = await Post.find(params.id)
+    const post = await Post.findOrFail(params.id)
 
     return view.render('post.show', { post })
   }
@@ -58,10 +58,13 @@ class PostController {
   }
 
   async destroy ({ request, params }) {
-    await Database
-      .table('posts')
-      .where('id', params.id)
-      .delete()
+    // await Database
+    //   .table('posts')
+    //   .where('id', params.id)
+    //   .delete()
+
+    const post = await Post.find(params.id)
+    post.delete()
 
     return 'success'
   }
