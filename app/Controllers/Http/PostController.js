@@ -1,9 +1,12 @@
 'use strict'
 
 const Database = use('Database')
+const Post = use('App/Models/Post')
 
 class PostController {
   async index () {
+    const posts = await Post.all()
+    return posts
   }
 
   async create ({ view }) {
