@@ -4,9 +4,11 @@ const Database = use('Database')
 const Post = use('App/Models/Post')
 
 class PostController {
-  async index () {
+  async index ({ view }) {
     const posts = await Post.all()
-    return posts
+    // console.log(posts)
+    // return posts
+    return view.render('post.index', { posts: posts.toJSON() })
   }
 
   async create ({ view }) {
