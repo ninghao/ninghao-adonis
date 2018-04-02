@@ -20,10 +20,16 @@ class UserController {
       .select('github')
       .fetch()
 
+    const posts = await user
+      .posts()
+      .select('title', 'content')
+      .fetch()
+
     return {
       username,
       email,
-      profile: profile.toJSON()
+      profile,
+      posts
     }
   }
 
