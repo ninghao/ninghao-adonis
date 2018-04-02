@@ -31,7 +31,12 @@ class PostController {
 
     const post = await Post.findOrFail(params.id)
 
-    return view.render('post.show', { post })
+    const tags = await post
+      .tags()
+      .select('id', 'title')
+      .fetch()
+
+    return view.render('post.show', { post, tags: tags.toJSON() })
   }
 
   async edit ({ view, params }) {
