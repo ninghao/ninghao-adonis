@@ -3,6 +3,10 @@
 const Model = use('Model')
 
 class User extends Model {
+  profile () {
+    return this.hasOne('App/Models/Profile')
+  }
+
   static boot () {
     super.boot()
 
