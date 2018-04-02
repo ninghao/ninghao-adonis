@@ -19,6 +19,7 @@ const Profile = use('App/Models/Profile')
 Route.on('/').render('welcome')
 Route.resource('posts', 'PostController')
 Route.resource('users', 'UserController')
+Route.resource('tags', 'TagController')
 
 Route.get('profiles/:id', async ({ params }) => {
   const profile = await Profile.find(params.id)

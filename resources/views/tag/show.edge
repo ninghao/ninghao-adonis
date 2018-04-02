@@ -1,0 +1,17 @@
+@layout('layouts.main')
+
+@section('content')
+  <div class="container">
+    <h1 class="mt-5 mb-4 font-weight-light">{{ tag.title }}</h1>
+    @if(posts)
+      <div class="my-5">
+        @each(post in posts)
+          <h3 class="mt-5 mb-4 font-weight-light">{{ post.title }}</h3>
+          <div>
+            {{ post.content }}
+          </div>
+        @endeach
+      </div>
+    @endif
+  </div>
+@endsection
