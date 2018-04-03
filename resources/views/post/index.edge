@@ -7,6 +7,11 @@
       <div>{{ post.content }}</div>
       <div class="text-muted mt-2">
         {{ post.user.username }}
+        <span class="px-2">
+          <a href="https://github.com/{{ post.user.profile.github }}" class="text-muted">
+            <i class="fab fa-github"></i>
+          </a>
+        </span>
       </div>
     @endeach
   </div>

@@ -10,6 +10,7 @@ class PostController {
       .with('user', (builder) => {
         builder.select('id', 'username')
       })
+      .with('user.profile')
       .fetch()
 
     console.log(posts.toJSON())
