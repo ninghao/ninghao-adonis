@@ -5,6 +5,9 @@
     @each(post in posts)
       <h3 class="mt-5 mb-4">{{ post.title }}</h3>
       <div>{{ post.content }}</div>
+      <div class="text-muted mt-2">
+        {{ post.user.username }}
+      </div>
     @endeach
   </div>
 @endsection

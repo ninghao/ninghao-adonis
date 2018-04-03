@@ -5,7 +5,14 @@ const Post = use('App/Models/Post')
 
 class PostController {
   async index ({ view }) {
-    const posts = await Post.all()
+    const posts = await Post
+      .query()
+      .with('user', (builder) => {
+        builder.select('id', 'username')
+      })
+      .fetch()
+
+    console.log(posts.toJSON())
     // console.log(posts)
     // return posts
     return view.render('post.index', { posts: posts.toJSON() })
