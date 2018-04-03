@@ -6,7 +6,7 @@
       <h3 class="mt-5 mb-4">{{ post.title }}</h3>
       <div>{{ post.content }}</div>
       <div class="text-muted mt-2">
-        {{ post.user.username }}
+        <a href="/users/{{ post.user.id }}" class="text-muted">{{ post.user.username }}</a>
         <span class="px-2">
           <a href="https://github.com/{{ post.user.profile.github }}" class="text-muted">
             <i class="fab fa-github"></i>

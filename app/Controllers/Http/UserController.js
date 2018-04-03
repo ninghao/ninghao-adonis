@@ -14,23 +14,31 @@ class UserController {
 
   async show ({ params }) {
     const user = await User.find(params.id)
-    const { username, email } = user.toJSON()
-    const profile = await user
-      .profile()
-      .select('github')
-      .fetch()
 
-    const posts = await user
-      .posts()
-      .select('title', 'content')
-      .fetch()
+    await user.loadMany({
+      posts: builder => builder.select('id', 'title', 'content'),
+      profile: builder => builder.select('github')
+    })
 
-    return {
-      username,
-      email,
-      profile,
-      posts
-    }
+    return user
+
+    // const { username, email } = user.toJSON()
+    // const profile = await user
+    //   .profile()
+    //   .select('github')
+    //   .fetch()
+    //
+    // const posts = await user
+    //   .posts()
+    //   .select('title', 'content')
+    //   .fetch()
+    //
+    // return {
+    //   username,
+    //   email,
+    //   profile,
+    //   posts
+    // }
   }
 
   async edit () {
