@@ -34,6 +34,20 @@
           </div>
         @endeach
       </div>
+      <div class="form-group">
+        <span class="px-3 text-muted"><i class="fas fa-tags"></i></span>
+        @each(tag in tags)
+          <div class="form-check form-check-inline">
+            <input type="checkbox"
+              name="tags"
+              value="{{ tag.id }}"
+              id="tag-{{ tag.id }}" class="form-check-input">
+            <label for="tag-{{ tag.id }}" class="form-check-label">
+              {{ tag.title }}
+            </label>
+          </div>
+        @endeach
+      </div>
       {{ csrfField() }}
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>

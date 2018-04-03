@@ -3,6 +3,7 @@
 const Database = use('Database')
 const Post = use('App/Models/Post')
 const User = use('App/Models/User')
+const Tag = use('App/Models/Tag')
 
 class PostController {
   async index ({ view }) {
@@ -22,7 +23,8 @@ class PostController {
 
   async create ({ view }) {
     const users = await User.all()
-    return view.render('post.create', { users: users.toJSON() })
+    const tags = await Tag.all()
+    return view.render('post.create', { users: users.toJSON(), tags: tags.toJSON() })
   }
 
   async store ({ request, response }) {
