@@ -28,15 +28,20 @@ class PostController {
   }
 
   async store ({ request, response }) {
-    const newPost = request.only(['title', 'content', 'user_id'])
+    const newPost = request.only(['title', 'content'])
+    const tags = request.input('tags')
     // const postID = await Database.insert(newPost).into('posts')
     // console.log('postID: ', postID)
     // const post = await Post.create(newPost)
 
-    const user = await User.find(newPost.user_id)
+    const user = await User.find(request.input('user_id'))
     const post = await user
       .posts()
       .create(newPost)
+
+    await post
+      .tags()
+      .attach(tags)
 
     return response.redirect(`/posts/${ post.id }`)
   }
