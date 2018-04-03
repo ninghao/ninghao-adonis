@@ -12,7 +12,7 @@ class UserController {
   async store () {
   }
 
-  async show ({ params }) {
+  async show ({ params, view }) {
     const user = await User.find(params.id)
 
     await user.loadMany({
@@ -20,7 +20,7 @@ class UserController {
       profile: builder => builder.select('github')
     })
 
-    return user
+    return view.render('user.show', { user: user.toJSON() })
 
     // const { username, email } = user.toJSON()
     // const profile = await user
