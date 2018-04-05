@@ -11,7 +11,7 @@ class UserController {
     return view.render('user.create')
   }
 
-  async store ({ request }) {
+  async store ({ request, session, response }) {
     const rules = {
       username: 'required|unique:users',
       email: 'required|email|unique:users',
@@ -23,7 +23,11 @@ class UserController {
     console.log(validation)
 
     if (validation.fails()) {
-      return
+      session
+        .withErrors(validation.messages())
+        .flashAll()
+
+      return response.redirect('back')
     }
 
     const newUser = request.only(['username', 'email', 'password'])
