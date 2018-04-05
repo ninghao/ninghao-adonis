@@ -1,7 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
-const { validate } = use('Validator')
+const { validate, validateAll } = use('Validator')
 
 class UserController {
   async index () {
@@ -18,7 +18,7 @@ class UserController {
       password: 'required|min:6|max:30'
     }
 
-    const validation = await validate(request.all(), rules)
+    const validation = await validateAll(request.all(), rules)
 
     console.log(validation)
 
@@ -33,7 +33,7 @@ class UserController {
     const newUser = request.only(['username', 'email', 'password'])
     const user = await User.create(newUser)
 
-    return user
+    return response.redirect(`/users/${ user.id }`)
   }
 
   async show ({ params, view }) {
