@@ -6,7 +6,8 @@ class UserController {
   async index () {
   }
 
-  async create () {
+  async create ({ view }) {
+    return view.render('user.create')
   }
 
   async store () {
