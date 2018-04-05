@@ -10,7 +10,11 @@ class UserController {
     return view.render('user.create')
   }
 
-  async store () {
+  async store ({ request }) {
+    const newUser = request.only(['username', 'email', 'password'])
+    const user = await User.create(newUser)
+
+    return user
   }
 
   async show ({ params, view }) {
