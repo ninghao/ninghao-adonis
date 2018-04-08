@@ -118,15 +118,20 @@ class PostController {
   }
 
   async update ({ request, params }) {
-    const updatedPost = request.only(['title', 'content'])
+    const { title, content, user_id, tags } = request.all()
     // await Database
     //   .table('posts')
     //   .where('id', params.id)
     //   .update(updatedPost)
 
     const post = await Post.findOrFail(params.id)
-    post.merge(updatedPost)
-    post.save()
+    post.merge({ title, content })
+    await post.save()
+
+    const user = await User.find(user_id)
+    await post.user().associate(user)
+
+    await post.tags().sync(tags)
   }
 
   async destroy ({ request, params }) {
