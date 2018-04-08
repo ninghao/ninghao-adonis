@@ -12,14 +12,16 @@
         hasErrorFor,
         old
       })
-      <div class="form-group">
-        <label for="content">Content</label>
-        <textarea
-          name="content"
-          cols="30" rows="10"
-          class="form-control"
-          placeholder="Write something amazing"></textarea>
-      </div>
+
+      @!component('components.form.textarea', {
+        name: 'content',
+        label: 'Content',
+        placeholder: 'Write something amazing',
+        getErrorFor,
+        hasErrorFor,
+        old
+      })
+
       <div class="form-group">
         <span class="px-3 text-muted"><i class="fas fa-user"></i></span>
         @each(user in users)

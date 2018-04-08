@@ -30,7 +30,8 @@ class PostController {
 
   async store ({ request, response, session }) {
     const rules = {
-      title: 'required'
+      title: 'required',
+      content: 'required'
     }
 
     const validation = await validateAll(request.all(), rules)
