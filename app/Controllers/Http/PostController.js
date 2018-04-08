@@ -5,6 +5,7 @@ const Post = use('App/Models/Post')
 const User = use('App/Models/User')
 const Tag = use('App/Models/Tag')
 const { validateAll } = use('Validator')
+const Route = use('Route')
 
 class PostController {
   async index ({ view }) {
@@ -117,7 +118,7 @@ class PostController {
     })
   }
 
-  async update ({ request, params }) {
+  async update ({ request, params, session, response }) {
     const { title, content, user_id, tags } = request.all()
     // await Database
     //   .table('posts')
@@ -132,6 +133,13 @@ class PostController {
     await post.user().associate(user)
 
     await post.tags().sync(tags)
+
+    session.flash({
+      type: 'primary',
+      message: `Post updated. <a href="${ Route.url('PostController.show', { id: post.id }) }" class="alert-link">Preview post.</a>`
+    })
+
+    return response.redirect('back')
   }
 
   async destroy ({ request, params }) {
