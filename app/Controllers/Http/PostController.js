@@ -86,7 +86,21 @@ class PostController {
 
     const post = await Post.findOrFail(params.id)
 
-    return view.render('post.edit', { post: post.toJSON() })
+    const _users = await User.all()
+    const users = _users.toJSON()
+
+    const userItems = users.map((user) => {
+      if (user.id === post.user_id) {
+        user.checked = true
+      }
+
+      return user
+    })
+
+    return view.render('post.edit', {
+      post: post.toJSON(),
+      users: userItems
+    })
   }
 
   async update ({ request, params }) {
