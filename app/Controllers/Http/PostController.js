@@ -4,6 +4,7 @@ const Database = use('Database')
 const Post = use('App/Models/Post')
 const User = use('App/Models/User')
 const Tag = use('App/Models/Tag')
+const { validateAll } = use('Validator')
 
 class PostController {
   async index ({ view }) {
@@ -27,7 +28,21 @@ class PostController {
     return view.render('post.create', { users: users.toJSON(), tags: tags.toJSON() })
   }
 
-  async store ({ request, response }) {
+  async store ({ request, response, session }) {
+    const rules = {
+      title: 'required'
+    }
+
+    const validation = await validateAll(request.all(), rules)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashAll()
+
+      return response.redirect('back')
+    }
+
     const newPost = request.only(['title', 'content'])
     const tags = request.input('tags')
     // const postID = await Database.insert(newPost).into('posts')
