@@ -4,7 +4,7 @@
     type="{{ type || 'text' }}"
     class="form-control {{ hasErrorFor(name) ? 'is-invalid' : '' }}"
     name="{{ name }}"
-    value="{{ old(name, '') }}"
+    value="{{ old(name, value) }}"
     placeholder="{{ placeholder }}">
   {{ elIf('<div class="invalid-feedback">$self</div>', getErrorFor(name), hasErrorFor(name)) }}
 </div>

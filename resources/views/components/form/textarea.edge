@@ -5,6 +5,6 @@
     name="{{ name }}"
     rows="{{ rows || 8 }}"
     cols="{{ cols || 80 }}"
-    placeholder="{{ placeholder }}">{{ old(name, '') }}</textarea>
+    placeholder="{{ placeholder }}">{{ old(name, value) }}</textarea>
   {{ elIf('<div class="invalid-feedback">$self</div>', getErrorFor(name), hasErrorFor(name)) }}
 </div>
