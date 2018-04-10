@@ -1,5 +1,7 @@
 'use strict'
 
+const Helpers = use('Helpers')
+
 class FileController {
   async index () {
   }
@@ -8,7 +10,19 @@ class FileController {
     return view.render('file.create')
   }
 
-  async store () {
+  async store ({ request, response }) {
+    const file = request.file('file', {
+      types: ['image', 'video'],
+      size: '20mb'
+    })
+
+    const fileName = `${ new Date().getTime() }.${ file.subtype }`
+
+    await file.move(Helpers.publicPath('uploads', {
+      name: fileName
+    }))
+
+    return response.redirect('back')
   }
 
   async show () {
