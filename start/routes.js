@@ -19,6 +19,11 @@ const Profile = use('App/Models/Profile')
 Route.on('/').render('welcome')
 
 Route
+  .get('upload', 'FileController.create')
+  .as('upload')
+Route.resource('files', 'FileController')
+
+Route
   .post('logout', 'AuthController.logout')
   .as('logout')
 
