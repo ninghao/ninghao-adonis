@@ -10,10 +10,10 @@ class FileController {
     return view.render('file.create')
   }
 
-  async store ({ request, response }) {
+  async store ({ request, response, session }) {
     const file = request.file('file', {
       types: ['image', 'video'],
-      size: '20mb'
+      size: '100mb'
     })
 
     const fileName = `${ new Date().getTime() }.${ file.subtype }`
@@ -21,6 +21,22 @@ class FileController {
     await file.move(Helpers.publicPath('uploads', {
       name: fileName
     }))
+
+    if (!file.moved()) {
+      const error = file.error()
+
+      session.flash({
+        type: 'warning',
+        message: `<small>${ error.clientName }</small>: ${ error.message }`
+      })
+
+      return response.redirect('back')
+    }
+
+    session.flash({
+      type: 'success',
+      message: `<small>${ file.clientName }</small>: Successfully uploaded.`
+    })
 
     return response.redirect('back')
   }
