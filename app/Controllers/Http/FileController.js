@@ -27,9 +27,9 @@ class FileController {
 
     const fileName = `${ new Date().getTime() }.${ file.subtype }`
 
-    await file.move(Helpers.publicPath('uploads', {
+    await file.move(Helpers.publicPath('uploads'), {
       name: fileName
-    }))
+    })
 
     if (!file.moved()) {
       const error = file.error()
@@ -58,7 +58,9 @@ class FileController {
     return response.redirect('back')
   }
 
-  async show () {
+  async show ({ params, view }) {
+    const file = await File.find(params.id)
+    return view.render('file.show', { file: file.toJSON() })
   }
 
   async edit () {
