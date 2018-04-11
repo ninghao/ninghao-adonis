@@ -1,6 +1,7 @@
 'use strict'
 
 const Helpers = use('Helpers')
+const File = use('App/Models/File')
 
 class FileController {
   async index () {
@@ -32,6 +33,14 @@ class FileController {
 
       return response.redirect('back')
     }
+
+    await File.create({
+      client_name: file.clientName,
+      file_name: fileName,
+      type: file.type,
+      subtype: file.subtype,
+      size: file.size
+    })
 
     session.flash({
       type: 'success',
