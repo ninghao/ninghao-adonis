@@ -4,7 +4,11 @@ const Helpers = use('Helpers')
 const File = use('App/Models/File')
 
 class FileController {
-  async index () {
+  async index ({ view }) {
+    const _files = await File.all()
+    const files = _files.toJSON()
+
+    return view.render('file.index', { files })
   }
 
   async create ({ view }) {
