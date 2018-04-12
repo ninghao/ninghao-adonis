@@ -7,10 +7,7 @@ const filesize = use('filesize')
 class FileController {
   async index ({ view }) {
     const _files = await File.all()
-    const files = _files.toJSON().map((file) => {
-      file.size = filesize(file.size)
-      return file
-    })
+    const files = _files.toJSON()
 
     return view.render('file.index', { files })
   }
