@@ -3,6 +3,7 @@
 const Helpers = use('Helpers')
 const File = use('App/Models/File')
 const filesize = use('filesize')
+const Drive = use('Drive')
 
 class FileController {
   async download ({ params, response }) {
