@@ -68,7 +68,10 @@ class FileController {
     return view.render('file.show', { file: file.toJSON() })
   }
 
-  async edit () {
+  async edit ({ view, params }) {
+    const file = await File.find(params.id)
+
+    return view.render('file.edit', { file })
   }
 
   async update () {

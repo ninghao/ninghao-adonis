@@ -23,5 +23,12 @@
         </a>
       </p>
     @endif
+    <ul class="nav justify-content-end fixed-bottom pb-4">
+      <li class="nav-item">
+        <a href="{{ route('files.edit', { id: file.id }) }}" class="nav-link btn btn-link">
+          Edit
+        </a>
+      </li>
+    </ul>
   </div>
 @endsection
