@@ -5,6 +5,13 @@ const File = use('App/Models/File')
 const filesize = use('filesize')
 
 class FileController {
+  async download ({ params, response }) {
+    const file = await File.find(params.id)
+    const filePath = `${ Helpers.publicPath('uploads') }/${ file.file_name }`
+
+    return response.attachment(filePath, file.client_name)
+  }
+
   async index ({ view }) {
     const _files = await File.all()
     const files = _files.toJSON()
