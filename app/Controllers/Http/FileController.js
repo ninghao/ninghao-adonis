@@ -4,6 +4,7 @@ const Helpers = use('Helpers')
 const File = use('App/Models/File')
 const filesize = use('filesize')
 const Drive = use('Drive')
+const Route = use('Route')
 
 class FileController {
   async download ({ params, response }) {
@@ -105,7 +106,27 @@ class FileController {
     return response.redirect('back')
   }
 
-  async destroy () {
+  async destroy ({ params, response, session }) {
+    try {
+      const fileData = await File.findOrFail(params.id)
+      const filePath = `${ Helpers.publicPath('uploads') }/${ fileData.file_name }`
+      await Drive.delete(filePath)
+      await fileData.delete()
+
+      session.flash({
+        type: 'success',
+        message: `<small>${ fileData.client_name }: </small>successfully deleted.`
+      })
+
+      return response.redirect(Route.url('files.index'))
+    } catch (error) {
+      session.flash({
+        type: 'warning',
+        message: error.message
+      })
+
+      return response.redirect('back')
+    }
   }
 }
 
