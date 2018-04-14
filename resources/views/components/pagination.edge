@@ -6,15 +6,11 @@
     </li>
     @endif
     @if(!hidePageNumbers)
-    <li class="page-item">
-      <a href="" class="page-link">1</a>
+    @each(item in pageItems(parseInt(lastPage), parseInt(page)))
+    <li class="page-item{{ page == item ? ' active' : '' }}">
+      <a href="{{ '?page=' + item }}" class="page-link">{{ item }}</a>
     </li>
-    <li class="page-item">
-      <a href="" class="page-link">2</a>
-    </li>
-    <li class="page-item">
-      <a href="" class="page-link">3</a>
-    </li>
+    @endeach
     @endif
     @if(!hideNavigator)
     <li class="page-item{{ page >= lastPage ? ' disabled' : '' }}">
