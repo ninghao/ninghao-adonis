@@ -15,7 +15,9 @@ class PostController {
         builder.select('id', 'username')
       })
       .with('user.profile')
-      .fetch()
+      .paginate(1, 3)
+
+    return posts
 
     console.log(posts.toJSON())
     // console.log(posts)
