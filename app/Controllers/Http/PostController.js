@@ -20,12 +20,7 @@ class PostController {
       .with('user.profile')
       .paginate(page, perPage)
 
-    return posts
-
-    console.log(posts.toJSON())
-    // console.log(posts)
-    // return posts
-    return view.render('post.index', { posts: posts.toJSON() })
+    return view.render('post.index', { ...posts.toJSON() })
   }
 
   async create ({ view }) {
