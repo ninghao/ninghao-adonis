@@ -6,7 +6,16 @@ hooks.after.providersBooted(() => {
 
   View.global('pageItems', (lastPage, page) => {
     const allPageItems = range(1, lastPage + 1)
-    return allPageItems
+    const pageItemRange = 2
+    const pageItemAfter = allPageItems.slice(page, page + pageItemRange)
+    const pageItemBefore = allPageItems.slice(page - lastPage - pageItemRange - 1, page - 1)
+    let pageItems = [
+      ...pageItemBefore,
+      page,
+      ...pageItemAfter
+    ]
+
+    return pageItems
   })
 
   View.global('parseInt', (value) => {
