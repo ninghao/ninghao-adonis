@@ -15,6 +15,37 @@ hooks.after.providersBooted(() => {
       ...pageItemAfter
     ]
 
+    let firstItem = [1]
+    let lastItem = [lastPage]
+
+    if (pageItemRange + 2 < page) {
+      firstItem = [
+        ...firstItem,
+        '...'
+      ]
+    }
+
+    if (lastPage - page - 1 > pageItemRange) {
+      lastItem = [
+        '...',
+        ...lastItem
+      ]
+    }
+
+    if (pageItemRange + 1 < page) {
+      pageItems = [
+        ...firstItem,
+        ...pageItems
+      ]
+    }
+
+    if (lastPage - page > pageItemRange) {
+      pageItems = [
+        ...pageItems,
+        ...lastItem
+      ]
+    }
+
     return pageItems
   })
 

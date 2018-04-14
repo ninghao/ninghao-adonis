@@ -7,8 +7,8 @@
     @endif
     @if(!hidePageNumbers)
     @each(item in pageItems(parseInt(lastPage), parseInt(page)))
-    <li class="page-item{{ page == item ? ' active' : '' }}">
-      <a href="{{ '?page=' + item }}" class="page-link">{{ item }}</a>
+    <li class="page-item{{ page == item ? ' active' : '' }}{{ item === '...' ? ' disabled' : '' }}">
+      <a href="{{ item === '...' ? '#' : '?page=' + item }}" class="page-link">{{ item }}</a>
     </li>
     @endeach
     @endif
