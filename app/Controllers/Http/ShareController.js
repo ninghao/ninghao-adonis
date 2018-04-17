@@ -19,6 +19,14 @@ class ShareController {
             .subject(`《${ post.title }》 - ${ author.username }`)
         })
     }
+
+    session
+      .flash({
+        type: 'success',
+        message: 'mail has been sent, check your inbox.'
+      })
+
+    return response.redirect('back')
   }
 }
 
