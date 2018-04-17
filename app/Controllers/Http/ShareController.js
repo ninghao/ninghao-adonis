@@ -32,10 +32,11 @@ class ShareController {
           (message) => {
             message
               .to(user.email)
-              .from('dev-demo@hola.ninghao.net')
+              .from(Env.get('SITE_MAIL'))
               .subject(`《${ post.title }》 - ${ author.username }`)
           }
         )
+      break
       case 'file':
         const file = await File.find(params.id)
         const filePath = `${ Helpers.publicPath('uploads') }/${ file.file_name }`
