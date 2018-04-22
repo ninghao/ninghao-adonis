@@ -10,10 +10,11 @@ const Route = use('Route')
 class PostController {
   async index ({ view, request }) {
     const page = request.input('page')
-    const perPage = 3
+    const perPage = 20
 
     const posts = await Post
       .query()
+      .orderBy('updated_at', 'desc')
       .with('user', (builder) => {
         builder.select('id', 'username')
       })
