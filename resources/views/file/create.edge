@@ -1,6 +1,7 @@
 @layout('layouts.main')
 
 @section('content')
+  @set('pageTitle', 'Upload')
   <h3 class="my-5">Upload</h3>
   @if(flashMessage('message'))
     @!component('components.alert', {
