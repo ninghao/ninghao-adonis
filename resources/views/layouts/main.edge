@@ -1,4 +1,7 @@
 @include('layouts.partials.header')
   @include('layouts.partials.navbar')
-  @!section('content')
+  <div class="container my-5">
+    @include('layouts.partials.alert')
+    @!section('content')
+  </div>
 @include('layouts.partials.footer')
