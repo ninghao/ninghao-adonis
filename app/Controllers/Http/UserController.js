@@ -36,15 +36,20 @@ class UserController {
     return response.redirect(`/users/${ user.id }`)
   }
 
-  async show ({ params, view }) {
+  async show ({ params, view, request }) {
+    const pageNumber = request.input('page', 1)
+    const pageSize = 20
+
     const user = await User.find(params.id)
+    await user.load('profile')
 
-    await user.loadMany({
-      posts: builder => builder.select('id', 'title', 'content'),
-      profile: builder => builder.select('github')
-    })
+    const posts = await user
+      .posts()
+      .orderBy('updated_at', 'desc')
+      .with('user')
+      .paginate(pageNumber, pageSize)
 
-    return view.render('user.show', { user: user.toJSON() })
+    return view.render('user.show', { user: user.toJSON(), ...posts.toJSON() })
 
     // const { username, email } = user.toJSON()
     // const profile = await user
