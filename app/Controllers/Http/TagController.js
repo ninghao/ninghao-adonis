@@ -12,14 +12,18 @@ class TagController {
   async store () {
   }
 
-  async show ({ params, view }) {
+  async show ({ params, view, request }) {
+    const pageNumber = request.input('page', 1)
+    const pageSize = 20
+
     const tag = await Tag.find(params.id)
     const posts = await tag
       .posts()
-      .select('id', 'title', 'content')
-      .fetch()
+      .orderBy('updated_at', 'desc')
+      .with('user')
+      .paginate(pageNumber, pageSize)
 
-    return view.render('tag.show', { tag, posts: posts.toJSON() })
+    return view.render('tag.show', { tag, ...posts.toJSON() })
   }
 
   async edit () {
