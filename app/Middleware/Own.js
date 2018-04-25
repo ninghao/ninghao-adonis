@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
+const PermissionCheckException = use('App/Exceptions/PermissionCheckException')
 
 class Own {
   async handle ({ request, params, auth, session, response }, next, args) {
@@ -17,15 +18,7 @@ class Own {
     const own = entity.user_id === auth.user.id
 
     if (!own && auth.user.id !== 1) {
-      session
-        .flash({
-          type: 'danger',
-          message: 'You have no permission to do this.'
-        })
-
-      await session.commit()
-
-      return response.redirect('back')
+      throw new PermissionCheckException('Permission check exception.', 403)
     }
 
     await next()
