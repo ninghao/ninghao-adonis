@@ -24,13 +24,20 @@ class PostController {
     return view.render('post.index', { ...posts.toJSON() })
   }
 
-  async create ({ view }) {
-    const users = await User.all()
+  async create ({ view, auth }) {
+    const userItems = [
+      {
+        ...auth.user.toJSON(),
+        checked: true
+      }
+    ]
+
+    // const users = await User.all()
     const tags = await Tag.all()
-    return view.render('post.create', { users: users.toJSON(), tags: tags.toJSON() })
+    return view.render('post.create', { users: userItems, tags: tags.toJSON() })
   }
 
-  async store ({ request, response, session }) {
+  async store ({ request, response, session, auth }) {
     const rules = {
       title: 'required',
       content: 'required'
@@ -52,8 +59,8 @@ class PostController {
     // console.log('postID: ', postID)
     // const post = await Post.create(newPost)
 
-    const user = await User.find(request.input('user_id'))
-    const post = await user
+    // const user = await User.find(request.input('user_id'))
+    const post = await auth.user
       .posts()
       .create(newPost)
 
@@ -61,7 +68,7 @@ class PostController {
       .tags()
       .attach(tags)
 
-    return response.redirect(`/posts/${ post.id }`)
+    return response.route('posts.show', { id: post.id })
   }
 
   async show ({ view, params }) {
