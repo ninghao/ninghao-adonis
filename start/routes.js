@@ -54,7 +54,7 @@ Route
   .resource('posts', 'PostController')
   .middleware(new Map([
     [['create', 'store', 'edit', 'update', 'destroy'], ['auth']],
-    [['update', 'destroy', 'edit'], ['own:post,file']]
+    [['update', 'destroy', 'edit'], ['own:post']]
   ]))
 
 Route.resource('users', 'UserController')
