@@ -13,8 +13,9 @@ class ProfileController {
   async show () {
   }
 
-  async edit ({ view }) {
-    return view.render('user.settings.profile.edit')
+  async edit ({ view, auth }) {
+    await auth.user.load('profile')
+    return view.render('user.settings.profile.edit', { user: auth.user.toJSON() })
   }
 
   async update () {
