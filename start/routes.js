@@ -19,6 +19,14 @@ const Profile = use('App/Models/Profile')
 Route.on('/').render('welcome')
 
 Route
+  .group(() => {
+    Route.get('profile', 'ProfileController.edit').as('profile.edit')
+    Route.post('profile', 'ProfileController.update').as('profile.update')
+  })
+  .prefix('settings')
+  .middleware(['auth'])
+
+Route
   .post('share/:type/:id/email', 'ShareController.email')
   .as('share.email')
 
