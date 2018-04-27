@@ -3,6 +3,10 @@
 const Model = use('Model')
 
 class User extends Model {
+  verification () {
+    return this.hasOne('App/Models/Verification')
+  }
+
   profile () {
     return this.hasOne('App/Models/Profile')
   }
