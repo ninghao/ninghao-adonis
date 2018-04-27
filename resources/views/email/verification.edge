@@ -1,0 +1,50 @@
+<style>
+  .n-mail-container {
+    background: #f8f8f8;
+    padding: 48px;
+    padding-bottom: 56px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .n-mail-box {
+    background: #ffffff;
+    padding: 40px;
+    padding-bottom: 56px;
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  .n-mail-header {
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  .n-mail-content {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  a.n-mail-button {
+    display: inline-block;
+    background: #007bff;
+    padding: 6px 12px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+</style>
+<div class="n-mail-container">
+  <div class="n-mail-box">
+    <h2 class="n-mail-header">Please verify your email</h2>
+    <div class="n-mail-content">
+      Press the button below to verify your email and activate your account <strong>{{ user.username }}</strong>
+    </div>
+    <a class="n-mail-button" href="{{ appURL }}{{ route('verification.email', { token: verification.token }) }}">
+      Verify
+    </a>
+  </div>
+</div>

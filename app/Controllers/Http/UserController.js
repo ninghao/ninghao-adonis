@@ -1,6 +1,8 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Mail = use('Mail')
+const Env = use('Env')
 
 class UserController {
   async index () {
@@ -13,6 +15,22 @@ class UserController {
   async store ({ request, session, response }) {
     const newUser = request.only(['username', 'email', 'password'])
     const user = await User.create(newUser)
+    const verification = await user.generateVerification()
+
+    await Mail.send(
+      'email.verification',
+      {
+        appURL: Env.get('APP_URL'),
+        verification,
+        user
+      },
+      (message) => {
+        message
+          .to(user.email)
+          .from(Env.get('SITE_MAIL'))
+          .subject(`Please verify your email ${ user.email }`)
+      }
+    )
 
     return response.redirect(`/users/${ user.id }`)
   }
