@@ -26,7 +26,10 @@ Route
       .as('profile.update')
       .validator('UpdateProfile')
     Route.get('password', 'PasswordController.edit').as('password.edit')
-    Route.post('password', 'PasswordController.update').as('password.update')
+    Route
+      .post('password', 'PasswordController.update')
+      .as('password.update')
+      .validator('UpdatePassword')
   })
   .prefix('settings')
   .middleware(['auth'])
