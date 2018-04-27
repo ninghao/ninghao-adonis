@@ -7,13 +7,19 @@
     @!component('components.form.input', {
       name: 'title',
       label: 'Title',
-      value: post.title
+      value: post.title,
+      getErrorFor,
+      hasErrorFor,
+      old
     })
 
     @!component('components.form.textarea', {
       name: 'content',
       label: 'Content',
-      value: post.content
+      value: post.content,
+      getErrorFor,
+      hasErrorFor,
+      old
     })
 
     @component('components.form.radio-horizontal', {

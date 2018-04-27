@@ -72,8 +72,16 @@ Route
     [['create', 'store', 'edit', 'update', 'destroy'], ['auth']],
     [['update', 'destroy', 'edit'], ['own:post']]
   ]))
+  .validator(new Map([
+    [['posts.store', 'posts.update'], ['StorePost']]
+  ]))
 
-Route.resource('users', 'UserController')
+Route
+  .resource('users', 'UserController')
+  .validator(new Map([
+    [['users.store'], ['StoreUser']]
+  ]))
+
 Route.resource('tags', 'TagController')
 
 Route.get('profiles/:id', async ({ params }) => {
