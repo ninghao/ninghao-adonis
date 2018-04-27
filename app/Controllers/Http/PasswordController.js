@@ -10,7 +10,8 @@ class PasswordController {
 
   async update ({ request, response, session, auth }) {
     const rules = {
-      old_password: `required|hashVerified:${ auth.user.password }`
+      old_password: `required|hashVerified:${ auth.user.password }`,
+      new_password: 'required|min:6|max:30|confirmed'
     }
 
     const messages = {
@@ -26,6 +27,17 @@ class PasswordController {
 
       return response.redirect('back')
     }
+
+    const { new_password } = request.all()
+    auth.user.password = await Hash.make(new_password)
+    await auth.user.save()
+
+    session.flash({
+      type: 'success',
+      message: 'Password successfully updated.'
+    })
+
+    return response.redirect('back')
   }
 }
 
