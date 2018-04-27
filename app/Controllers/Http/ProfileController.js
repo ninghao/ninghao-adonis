@@ -1,7 +1,5 @@
 'use strict'
 
-const { validateAll } = use('Validator')
-
 class ProfileController {
   async index () {
   }
@@ -21,21 +19,6 @@ class ProfileController {
   }
 
   async update ({ request, response, auth, session }) {
-    const rules = {
-      username: `required|unique:users,username,id,${ auth.user.id }`,
-      email: `required|email|unique:users,email,id,${ auth.user.id }`,
-      github: `unique:profiles,github,user_id,${ auth.user.id }`
-    }
-
-    const validation = await validateAll(request.all(), rules)
-
-    if (validation.fails()) {
-      session
-        .withErrors(validation.messages())
-        .flashAll()
-      return response.redirect('back')
-    }
-
     const { username, email, github } = request.all()
     auth.user.merge({ username, email })
     await auth.user.save()
