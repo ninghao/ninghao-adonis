@@ -1,6 +1,8 @@
 'use strict'
 
 const Verification = use('App/Models/Verification')
+const Mail = use('Mail')
+const Env = use('Env')
 const moment = use('moment')
 
 class VerificationController {
@@ -40,6 +42,35 @@ class VerificationController {
     })
 
     return response.route('users.show', { id: user.id })
+  }
+
+  async resend ({ request, response, session, auth }) {
+    const user = auth.user
+    await user.verification().delete()
+
+    const verification = await user.generateVerification()
+
+    await Mail.send(
+      'email.verification',
+      {
+        appURL: Env.get('APP_URL'),
+        verification,
+        user
+      },
+      (message) => {
+        message
+          .to(user.email)
+          .from(Env.get('SITE_MAIL'))
+          .subject(`Please verify your email ${ user.email }`)
+      }
+    )
+
+    session.flash({
+      type: 'success',
+      message: `We sent a verification email to ${ user.email }.`
+    })
+
+    return response.redirect('back')
   }
 }
 

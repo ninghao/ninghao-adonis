@@ -23,6 +23,10 @@ Route
   .as('verification.email')
 
 Route
+  .post('users/verification/resend', 'VerificationController.resend')
+  .as('verification.resend')
+
+Route
   .group(() => {
     Route.get('profile', 'ProfileController.edit').as('profile.edit')
     Route
