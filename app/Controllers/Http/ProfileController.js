@@ -29,7 +29,12 @@ class ProfileController {
     }
 
     await user.save()
-    await user.profile().update({ github })
+
+    if (!await user.hasProfile()) {
+      await user.profile().create({ github })
+    } else {
+      await user.profile().update({ github })
+    }
 
     session
       .flash({
