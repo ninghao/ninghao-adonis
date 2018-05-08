@@ -7,9 +7,16 @@ Formats.add('longWeekDay', {
 })
 
 class AntlDemoController {
-  async demo ({ view, antl, locale }) {
+  async localeSwitch ({ session, response, request }) {
+    session.put('locale', request.input('locale'))
+    return response.redirect('back')
+  }
+
+  async demo ({ view, antl, locale, session }) {
+    const _locale = session.get('locale') || locale
+
     return view.render('demo.antl', {
-      locale,
+      locale: _locale,
       // message: antl.formatNumber(0.33333, {
       //   // minimumIntegerDigits: 2,
       //   // minimumFractionDigits: 2,
