@@ -1,4 +1,4 @@
 {
   "greeting": "hello, {name}",
-  "message": "{gender, select, male {He} female {She} other {They}} will respond shortly"
+  "message": "{count, plural, =0 {No candy left} =1 {Got # candy left} other {Got # candies left}}"
 }

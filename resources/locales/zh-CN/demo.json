@@ -1,4 +1,4 @@
 {
   "greeting": "您好，{name}",
-  "message": "{gender, select, male {他} female {她} other {他们}}会很快给您回复"
+  "message": "{count, plural, =0 {没有糖果了} =1 {还剩下 # 个糖果} other {还剩下 # 个糖果}}"
 }

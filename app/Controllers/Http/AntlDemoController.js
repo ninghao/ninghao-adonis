@@ -28,10 +28,15 @@ class AntlDemoController {
       //   timeZoneName: 'long',
       //   hour12: false
       // }),
+      // message: antl.formatMessage('demo.message', {
+      //   // gender: 'male',
+      //   gender: 'female',
+      // }),
       message: antl.formatMessage('demo.message', {
-        // gender: 'male',
-        gender: 'female',
-      })
+        // count: 0,
+        // count: 1,
+        count: 3,
+      }),
     })
   }
 }
