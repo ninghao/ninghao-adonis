@@ -1,3 +1,4 @@
 {
-  "greeting": "您好，{name}"
+  "greeting": "您好，{name}",
+  "message": "{gender, select, male {他} female {她} other {他们}}会很快给您回复"
 }

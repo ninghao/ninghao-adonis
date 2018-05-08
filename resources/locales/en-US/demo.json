@@ -1,3 +1,4 @@
 {
-  "greeting": "hello, {name}"
+  "greeting": "hello, {name}",
+  "message": "{gender, select, male {He} female {She} other {They}} will respond shortly"
 }
