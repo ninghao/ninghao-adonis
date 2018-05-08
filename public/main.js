@@ -21,4 +21,10 @@
     })
   })
 
+  const localeSwitch = $('#locale-switch')
+
+  localeSwitch.change(() => {
+    localeSwitch.submit()
+  })
+
 }())

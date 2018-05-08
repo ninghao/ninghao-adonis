@@ -9,6 +9,25 @@
       <p class="display-3 font-weight-light">
         {{ message }}
       </p>
+      <form action="{{ route('localeSwitch') }}" method="POST" id="locale-switch">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary{{ locale == 'zh-CN' ? ' active' : '' }}">
+            <input
+              {{ locale == 'zh-CN' ? 'checked' : '' }}
+              name="locale"
+              value="zh-CN"
+              type="radio">中文简体
+          </label>
+          <label class="btn btn-secondary{{ locale == 'en-US' ? ' active' : '' }}">
+            <input
+              {{ locale == 'en-US' ? 'checked' : '' }}
+              name="locale"
+              value="en-US"
+              type="radio">English
+          </label>
+        </div>
+        {{ csrfField() }}
+      </form>
     </div>
   </div>
 @endsection
