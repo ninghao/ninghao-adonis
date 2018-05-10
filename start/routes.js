@@ -19,6 +19,11 @@ const Profile = use('App/Models/Profile')
 Route.on('/').render('welcome')
 
 Route
+  .get('demo/ws', ({ view }) => {
+    return view.render('demo.ws')
+  })
+
+Route
   .post('locale-switch', 'AntlDemoController.localeSwitch')
   .as('localeSwitch')
 

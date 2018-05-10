@@ -3,3 +3,9 @@
   letter-spacing: 3px;
   font-weight: bold;
 }
+
+.badge.empty {
+  height: 14px!important;
+  width: 14px!important;
+  display: block;
+}

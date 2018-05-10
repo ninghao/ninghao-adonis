@@ -1,0 +1,23 @@
+@layout('layouts.main')
+
+@section('content')
+  @set('pageTitle', 'Websocket demo')
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1 class="text-center text-uppercase py-5">
+        <span style="letter-spacing: 13px; font-weight: 100">
+          Web<span style="font-weight: 300">socket</span>
+        </span>
+        <span class="badge badge-primary badge-pill position-absolute" style="font-size: 14px">
+          demo
+        </span>
+      </h1>
+      <div class="btn btn-light btn-sm connection-status">
+        <span class="text">Disconnected</span>
+        <span class="icon text-muted ml-1">
+          <i class="fas fa-circle"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+@endsection
