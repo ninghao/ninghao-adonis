@@ -4,6 +4,7 @@ ws.connect()
 const connectionStatus = $('.connection-status')
 const connectionStatusText = $('.connection-status .text')
 const connectionStatusIcon = $('.connection-status .icon')
+const message = $('#message')
 
 ws.on('open', () => {
   connectionStatus.removeClass('text-muted')
@@ -26,3 +27,18 @@ const subscribeToChannel = () => {
     console.log(message)
   })
 }
+
+message.keyup(function (event) {
+  if (event.which === 13) {
+    event.preventDefault()
+
+    const messageContent = $(this).val()
+    $(this).val('')
+
+    if (messageContent) {
+      ws.getSubscription('demo').emit('message', {
+        content: messageContent
+      })
+    }
+  }
+})
