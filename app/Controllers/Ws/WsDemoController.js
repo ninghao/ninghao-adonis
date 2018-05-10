@@ -11,6 +11,8 @@ class WsDemoController {
 
   onMessage (message) {
     console.log(message)
+
+    this.socket.broadcastToAll('message', message)
   }
 }
 

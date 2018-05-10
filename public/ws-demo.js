@@ -21,4 +21,8 @@ ws.on('close', () => {
 
 const subscribeToChannel = () => {
   const demo = ws.subscribe('demo')
+
+  demo.on('message', (message) => {
+    console.log(message)
+  })
 }
