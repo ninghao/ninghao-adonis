@@ -5,6 +5,7 @@ const connectionStatus = $('.connection-status')
 const connectionStatusText = $('.connection-status .text')
 const connectionStatusIcon = $('.connection-status .icon')
 const message = $('#message')
+const messages = $('.messages')
 
 ws.on('open', () => {
   connectionStatus.removeClass('text-muted')
@@ -25,6 +26,19 @@ const subscribeToChannel = () => {
 
   demo.on('message', (message) => {
     console.log(message)
+
+    messages.append(`
+      <div class="message my-4 d-flex">
+        <div class="mr-2">
+          <small class="text-black-50" style="white-space: nowrap">${ message.username }: </small>
+        </div>
+        <div>
+          ${ message.content }
+        </div>
+      </div>
+    `)
+
+    messages.animate({ scrollTop: messages.height() + messages.scrollTop() }, 'slow')
   })
 }
 

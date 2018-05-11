@@ -1,9 +1,10 @@
 'use strict'
 
 class WsDemoController {
-  constructor ({ socket, request }) {
+  constructor ({ socket, request, auth }) {
     this.socket = socket
     this.request = request
+    this.user = auth.user || { username: 'Anonymous' }
 
     console.log('socket.id', socket.id)
     console.log('socket.topic', socket.topic)
@@ -12,7 +13,13 @@ class WsDemoController {
   onMessage (message) {
     console.log(message)
 
-    this.socket.broadcastToAll('message', message)
+    const { username } = this.user
+    const { content } = message
+
+    this.socket.broadcastToAll('message', {
+      username,
+      content
+    })
   }
 }
 
