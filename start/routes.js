@@ -80,6 +80,7 @@ Route
 Route
   .post('auth', 'AuthController.auth')
   .as('auth')
+  .validator('LoginUser')
 
 Route
   .get('register', 'UserController.create')
