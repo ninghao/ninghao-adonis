@@ -1,12 +1,14 @@
 'use strict'
 
+const BaseExceptionHandler = use('BaseExceptionHandler')
+
 /**
  * This class handles all exceptions thrown during
  * the HTTP request lifecycle.
  *
  * @class ExceptionHandler
  */
-class ExceptionHandler {
+class ExceptionHandler extends BaseExceptionHandler {
   /**
    * Handle exception thrown during the HTTP lifecycle
    *
@@ -18,8 +20,31 @@ class ExceptionHandler {
    *
    * @return {void}
    */
-  async handle (error, { request, response }) {
-    response.status(error.status).send(error.message)
+  async handle (error, ctx) {
+    switch (error.name) {
+      case 'UserNotFoundException':
+        await this.handleUserNotFoundException(error, ctx)
+        break
+      default:
+        return super.handle(...arguments)
+    }
+  }
+
+  async handleUserNotFoundException ({ status, uidField, passwordField, authScheme }, { request, response, session }) {
+    const errorMessages = [{ field: uidField, message: `Cannot find user with provided ${uidField} : (` }]
+
+    /**
+     * If auth scheme is session, then flash the data
+     * back to the form
+     */
+    if (authScheme === 'session') {
+      session.withErrors(errorMessages).flashExcept([passwordField])
+      await session.commit()
+      response.redirect('back')
+      return
+    }
+
+    return super.handle(...arguments)
   }
 
   /**
