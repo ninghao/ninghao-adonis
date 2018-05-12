@@ -25,6 +25,9 @@ class ExceptionHandler extends BaseExceptionHandler {
       case 'UserNotFoundException':
         await this.handleUserNotFoundException(error, ctx)
         break
+      case 'PasswordMisMatchException':
+        await this.handlePasswordMisMatchException(error, ctx)
+        break
       default:
         return super.handle(...arguments)
     }
@@ -32,6 +35,23 @@ class ExceptionHandler extends BaseExceptionHandler {
 
   async handleUserNotFoundException ({ status, uidField, passwordField, authScheme }, { request, response, session }) {
     const errorMessages = [{ field: uidField, message: `Cannot find user with provided ${uidField} : (` }]
+
+    /**
+     * If auth scheme is session, then flash the data
+     * back to the form
+     */
+    if (authScheme === 'session') {
+      session.withErrors(errorMessages).flashExcept([passwordField])
+      await session.commit()
+      response.redirect('back')
+      return
+    }
+
+    return super.handle(...arguments)
+  }
+
+  async handlePasswordMisMatchException ({ status, passwordField, authScheme }, { request, response, session }) {
+    const errorMessages = [{ field: passwordField, message: 'Invalid user password : (' }]
 
     /**
      * If auth scheme is session, then flash the data
