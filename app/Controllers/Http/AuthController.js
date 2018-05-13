@@ -1,5 +1,7 @@
 'use strict'
 
+const Event = use('Event')
+
 const { validateAll } = use('Validator')
 
 class AuthController {
@@ -30,6 +32,8 @@ class AuthController {
     await auth.attempt(username, password)
 
     const user = await auth.getUser()
+
+    Event.emit('user.login', user)
 
     const redirectUrl = session.get('redirectUrl')
 
