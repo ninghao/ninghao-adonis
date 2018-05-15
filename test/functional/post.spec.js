@@ -1,7 +1,15 @@
 'use strict'
 
-const { test } = use('Test/Suite')('Post')
+const { test, trait } = use('Test/Suite')('Post')
+const Post = use('App/Models/Post')
 
-test('make sure 2 + 2 is 4', async ({ assert }) => {
-  assert.equal(2 + 2, 4)
+trait('DatabaseTransactions')
+
+test('use traits in test', async ({ assert }) => {
+  const post = {
+    title: 'hello test',
+    content: 'hello test'
+  }
+
+  await Post.create(post)
 })
