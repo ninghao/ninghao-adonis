@@ -36,3 +36,11 @@ test('get list of posts', async ({ client }) => {
     ]
   })
 })
+
+test('should redirect to login page when the user did not login', async ({ client }) => {
+  const response = await client
+    .get(Route.url('posts.create'))
+    .end()
+
+  response.assertRedirect(Route.url('login'))
+})
