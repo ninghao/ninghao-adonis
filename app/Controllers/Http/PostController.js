@@ -7,7 +7,7 @@ const Tag = use('App/Models/Tag')
 const Route = use('Route')
 
 class PostController {
-  async index ({ view, request }) {
+  async index ({ view, request, response }) {
     const page = request.input('page')
     const perPage = 20
 
@@ -19,6 +19,12 @@ class PostController {
       })
       .with('user.profile')
       .paginate(page, perPage)
+
+    const format = request.accepts(['json', 'html'])
+    
+    if (format === 'json') {
+      return response.send(posts)
+    }
 
     return view.render('post.index', { ...posts.toJSON() })
   }
