@@ -39,6 +39,13 @@ class User extends Model {
     return this.hasMany('App/Models/Post')
   }
 
+  permissions () {
+    return this
+      .belongsToMany('App/Models/Permission')
+      .pivotTable('user_permission')
+      .withTimestamps()
+  }
+
   static boot () {
     super.boot()
 
