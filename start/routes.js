@@ -15,10 +15,18 @@
 
 const Route = use('Route')
 const Profile = use('App/Models/Profile')
+const User = use('App/Models/User')
 
 Route
   .get('/', ({ response }) => response.route('posts.index'))
   .as('index')
+
+Route
+  .get('demo/acl', async () => {
+    const user = await User.find(1)
+
+    return user.can()
+  })
 
 Route
   .get('demo/ws', ({ view }) => {

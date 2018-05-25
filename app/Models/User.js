@@ -49,6 +49,8 @@ class User extends Model {
   static boot () {
     super.boot()
 
+    this.addTrait('Can')
+
     /**
      * A hook to bash the user password before saving
      * it to the database.
