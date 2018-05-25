@@ -101,6 +101,7 @@ Route
 Route
   .resource('posts', 'PostController')
   .middleware(new Map([
+    [['create', 'store'], ['auth', 'can:create post']],
     [['create', 'store', 'edit', 'update', 'destroy'], ['auth']],
     [['update', 'destroy', 'edit'], ['own:post']]
   ]))
