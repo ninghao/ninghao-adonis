@@ -23,9 +23,9 @@ Route
 
 Route
   .get('demo/acl', async () => {
-    const user = await User.find(1)
-
-    return user.can()
+    const user = await User.find(2)
+    const permissions = await user.getPermissions()
+    return permissions
   })
 
 Route
