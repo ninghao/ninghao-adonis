@@ -22,8 +22,18 @@ class Can {
     return permissions
   }
 
-  async can () {
-    return `hello ${ this.username }`
+  async can (permissions, all = true) {
+    const userPermissions = await this.getPermissions()
+
+    if (Array.isArray(permissions)) {
+      const result = permissions.map((permission) => {
+        return userPermissions.includes(permission)
+      })
+
+      return all ? !result.includes(false) : result.includes(true)
+    }
+
+    return userPermissions.includes(permissions)
   }
 }
 
