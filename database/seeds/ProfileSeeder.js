@@ -18,6 +18,8 @@ class ProfileSeeder {
     const profiles = [
       { github: 'wanghao8080', user_id: 1 },
       { github: 'xiaoxue8080', user_id: 2 }
+      { github: 'z38080', user_id: 3 }
+      { github: 'l48080', user_id: 4 }
     ]
 
     await Profile.createMany(profiles)
