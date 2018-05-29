@@ -22,13 +22,13 @@ Route
   .as('index')
 
 Route
-  .get('demo/acl', async () => {
+  .get('demo/acl', async ({ request }) => {
     const user = await User.find(2)
     const roles = await user.getRoles()
     const permissions = await user.getPermissions()
     // const result = await user.can(['create post', 'read post', 'update post'])
     const result = await user.is('admin')
-    return permissions
+    return request.permissions
   })
 
 Route

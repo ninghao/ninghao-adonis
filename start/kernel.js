@@ -16,7 +16,8 @@ const globalMiddleware = [
   'Adonis/Middleware/Session',
   'Adonis/Middleware/Shield',
   'Adonis/Middleware/AuthInit',
-  'App/Middleware/LocaleSwitch'
+  'App/Middleware/LocaleSwitch',
+  'App/Middleware/Permission'
 ]
 
 /*
