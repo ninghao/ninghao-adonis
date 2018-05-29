@@ -1,5 +1,7 @@
 'use strict'
 
+const { check } = use('acler')
+
 class Is {
   register (Model, customOptions = {}) {
     const defaultOptions = {}
@@ -16,18 +18,14 @@ class Is {
     return roles
   }
 
-  async is (roles, all = false) {
+  async is (roleExpression,) {
     const userRoles = await this.getRoles()
 
-    if (Array.isArray(roles)) {
-      const result = roles.map((role) => {
-        return userRoles.includes(role)
-      })
+    const result = check(roleExpression, (role) => {
+      return userRoles.includes(role)
+    })
 
-      return all ? !result.includes(false) : result.includes(true)
-    }
-
-    return userRoles.includes(roles)
+    return result
   }
 }
 

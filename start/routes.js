@@ -23,12 +23,12 @@ Route
 
 Route
   .get('demo/acl', async ({ request }) => {
-    const user = await User.find(1)
+    const user = await User.find(2)
     const roles = await user.getRoles()
     const permissions = await user.getPermissions()
     // const result = await user.can(['create post', 'read post', 'update post'])
-    // const result = await user.is('admin')
-    const result = await user.can('update_post && delete_post')
+    const result = await user.is('member && !admin')
+    // const result = await user.can('update_post && delete_post')
     return result
   })
 
