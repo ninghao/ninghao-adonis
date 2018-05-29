@@ -1,5 +1,7 @@
 'use strict'
 
+const { flatten, uniq } = use('lodash')
+
 class Can {
   register (Model, customOptions = {}) {
     const defaultOptions = {}
@@ -15,9 +17,14 @@ class Can {
       .toJSON()
       .map(permission => permission.name)
 
-    const permissions = [
-      ...userPermissions
-    ]
+    const _roles = await this.roles().with('permissions').fetch()
+    const _rolePermissions = _roles.toJSON().map(role => role.permissions)
+    const rolePermissions = flatten(_rolePermissions).map(permission => permission.name)
+
+    const permissions = uniq([
+      ...userPermissions,
+      ...rolePermissions
+    ])
 
     return permissions
   }
