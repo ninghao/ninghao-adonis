@@ -1,6 +1,7 @@
 'use strict'
 
 const { flatten, uniq } = use('lodash')
+const { check } = use('acler')
 
 class Can {
   register (Model, customOptions = {}) {
@@ -29,18 +30,14 @@ class Can {
     return permissions
   }
 
-  async can (permissions, all = true) {
+  async can (permissionExpression) {
     const userPermissions = await this.getPermissions()
 
-    if (Array.isArray(permissions)) {
-      const result = permissions.map((permission) => {
-        return userPermissions.includes(permission)
-      })
+    const result = check(permissionExpression, (permission) => {
+      return userPermissions.includes(permission)
+    })
 
-      return all ? !result.includes(false) : result.includes(true)
-    }
-
-    return userPermissions.includes(permissions)
+    return result
   }
 }
 
