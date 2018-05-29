@@ -28,7 +28,7 @@ Route
     const permissions = await user.getPermissions()
     // const result = await user.can(['create post', 'read post', 'update post'])
     const result = await user.is('admin')
-    return request.permissions
+    return request.roles
   })
 
 Route
