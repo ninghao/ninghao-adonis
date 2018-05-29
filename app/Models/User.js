@@ -14,6 +14,13 @@ class User extends Model {
     return true
   }
 
+  roles () {
+    return this
+      .belongsToMany('App/Models/Role')
+      .pivotTable('user_role')
+      .withTimestamps()
+  }
+
   verification () {
     return this.hasOne('App/Models/Verification')
   }
