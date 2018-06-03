@@ -23,7 +23,8 @@ const providers = [
   '@adonisjs/drive/providers/DriveProvider',
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/antl/providers/AntlProvider',
-  '@adonisjs/websocket/providers/WsProvider'
+  '@adonisjs/websocket/providers/WsProvider',
+  '@adonisjs/redis/providers/RedisProvider'
 ]
 
 /*
