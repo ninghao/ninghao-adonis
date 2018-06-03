@@ -1,8 +1,13 @@
 'use strict'
 
 class Greeting {
+  constructor (Config) {
+    this.Config = Config
+  }
+
   hello () {
-    return 'hello'
+    const greeting = this.Config.get('demo.greeting')
+    return greeting
   }
 }
 
