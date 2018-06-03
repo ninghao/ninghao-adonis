@@ -27,7 +27,7 @@ const providers = [
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/websocket/providers/WsProvider',
   '@adonisjs/redis/providers/RedisProvider',
-  path.join(__dirname, '..', 'providers/Demo/DemoProvider')
+  '@ninghao/adonis-service-provider-demo/providers/DemoProvider'
 ]
 
 /*

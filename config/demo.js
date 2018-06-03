@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = {
-  greeting: '您好'
+  greeting: 'hello'
 }

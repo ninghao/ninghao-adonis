@@ -34,6 +34,7 @@
     "@adonisjs/validator": "^5.0.3",
     "@adonisjs/vow": "^1.0.15",
     "@adonisjs/websocket": "^1.0.9",
+    "@ninghao/adonis-service-provider-demo": "^2.0.0",
     "acler": "^1.0.0",
     "filesize": "^3.6.1",
     "lodash": "^4.17.5",
