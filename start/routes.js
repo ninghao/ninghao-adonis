@@ -16,7 +16,7 @@
 const Route = use('Route')
 const Profile = use('App/Models/Profile')
 const User = use('App/Models/User')
-const Greeting = use('Ninghao/Demo/Greeting')
+const Greeting = use('Greeting')
 
 Route
   .get('/', ({ response }) => response.route('posts.index'))

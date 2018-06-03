@@ -9,6 +9,8 @@ class DemoProvider extends ServiceProvider {
       const Greeting = require('./src/Greeting')
       return new Greeting(Config)
     })
+
+    this.app.alias('Ninghao/Demo/Greeting', 'Greeting')
   }
 
   boot () {
