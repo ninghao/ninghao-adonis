@@ -16,10 +16,16 @@
 const Route = use('Route')
 const Profile = use('App/Models/Profile')
 const User = use('App/Models/User')
+const Greeting = use('Ninghao/Demo/Greeting')
 
 Route
   .get('/', ({ response }) => response.route('posts.index'))
   .as('index')
+
+Route
+  .get('demo/ioc', async () => {
+    return Greeting.hello()
+  })
 
 Route
   .get('demo/acl', async ({ request }) => {
