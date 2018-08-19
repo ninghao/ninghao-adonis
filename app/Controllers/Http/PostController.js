@@ -5,6 +5,8 @@ const Post = use('App/Models/Post')
 const User = use('App/Models/User')
 const Tag = use('App/Models/Tag')
 const Route = use('Route')
+// const File = use('App/Models/File')
+const Helpers = use('Helpers')
 
 class PostController {
   async index ({ view, request, response }) {
@@ -57,6 +59,42 @@ class PostController {
     await post
       .tags()
       .attach(tags)
+
+    // 得到创建文章表单里 file 元素里的文件
+    const files = request.file('file', {
+      types: ['image'],
+      size: '20mb'
+    })
+
+    // 移动并重命名文件
+    await files.moveAll(Helpers.publicPath('uploads'), (file) => {
+      return {
+        name: `${new Date().getTime()}.${file.subtype}`
+      }
+    })
+
+    // 得到成功移动的文件
+    const movedFiles = files.movedList()
+
+    // 准备要保存在 files 表里的数据
+    const _movedFiles = movedFiles.map((file) => {
+      return {
+        client_name: file.clientName,
+        file_name: file.fileName,
+        type: file.type,
+        subtype: file.subtype,
+        size: file.size
+      }
+    })
+
+    if (!files.movedAll()) {
+      return files.errors()
+    }
+
+    // 利用 Post 模型里定义的 files 关系，在中间表保存文章与文件的关系
+    await post
+      .files()
+      .createMany(_movedFiles)
 
     const format = request.accepts(['json', 'html'])
 
