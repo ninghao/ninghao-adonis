@@ -4,7 +4,7 @@ const PermissionCheckException = use('App/Exceptions/PermissionCheckException')
 
 class Is {
   async handle ({ auth }, next, args) {
-    const roles = args
+    const roles = args[0]
 
     const result = await auth.user.is(roles)
 
