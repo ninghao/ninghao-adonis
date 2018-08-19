@@ -117,8 +117,10 @@ class PostController {
       .tags()
       .select('id', 'title')
       .fetch()
+    
+    await post.load('files')
 
-    return view.render('post.show', { post, tags: tags.toJSON() })
+    return view.render('post.show', { post: post.toJSON(), tags: tags.toJSON() })
   }
 
   async edit ({ view, params, auth }) {

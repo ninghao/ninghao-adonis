@@ -3,6 +3,9 @@
 @section('content')
   @set('pageTitle', post.title)
   <h1 class="mt-5 mb-4 font-weight-light">{{ post.title }}</h1>
+  @each(file in post.files)
+    <img src="/uploads/{{ file.file_name }}" alt="{{ file.client_name }}" class="figure-img img-fluid rounded">
+  @endeach
   <div>
     {{ post.content }}
   </div>
