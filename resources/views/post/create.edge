@@ -3,7 +3,7 @@
 @section('content')
   @set('pageTitle', 'Add New Post')
   <h3 class="mt-5 mb-4">Add New Post</h3>
-  <form action="{{ route('PostController.store') }}" method="POST">
+  <form action="{{ route('PostController.store') }}" method="POST" enctype="multipart/form-data">
     @!component('components.form.input', {
       name: 'title',
       label: 'Title',
@@ -48,6 +48,8 @@
           <span class="px-3 text-muted"><i class="fas fa-tags"></i></span>
       @endslot
     @endcomponent
+    
+    <input type="file" name="file[]" multiple>
 
     {{ csrfField() }}
     <button class="btn btn-primary" type="submit">Submit</button>
