@@ -7,6 +7,12 @@ class Post extends Model {
     return this.belongsToMany('App/Models/Tag')
   }
 
+  files () {
+    return this
+      .belongsToMany('App/Models/File')
+      .pivotTable('post_file')
+  }
+
   user () {
     return this.belongsTo('App/Models/User')
   }
